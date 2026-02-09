@@ -1,0 +1,15 @@
+# Vercel build ignore file
+node_modules/
+.git/
+.github/
+.gitignore
+.gitattributes
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env.local
+.env.*.local
+.DS_Store
+dist/
+build/
+.vercel/

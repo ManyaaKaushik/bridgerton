@@ -1,31 +1,33 @@
-import React from 'react';
+import React from "react";
 
 const Screen0 = ({ onStartClick }) => {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-tan via-floral-white to-tan relative overflow-hidden font-crimson">
+    <div
+      className="min-h-screen bg-[#461A00] flex flex-col justify-center items-cente relative overflow-hidden font-crimson bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('/bg.png')",
+        backgroundAttachment: "fixed",
+        backgroundSize: "cover",
+      }}
+    >
       <div className="text-center z-10 animate-fade-in">
-        <h1 className="text-7xl font-playfair text-dark-brown mb-2 italic font-light tracking-widest drop-shadow-md">
-          Dearest Valentine
+        <h1 className="text-7xl font-luxurious text-dark-brown mb-2 tracking-tight drop-shadow-md">
+          Dearest &nbsp; Valentine
         </h1>
-        <p className="text-3xl font-crimson text-medium-brown mb-16 font-light tracking-wide">
+        <p className="text-3xl italic tracking-tight font-linden-hill text-medium-brown mb-16 font-light">
           A Bridgerton Affair
         </p>
-        
-        <button 
-          className="btn-primary text-lg"
+
+        <a
+          className="relative w-64 h-36 mx-auto bg-cover bg-center bg-no-repeat hover:scale-105 transition-transform duration-200 cursor-pointer flex items-center justify-center"
+          style={{ backgroundImage: "url('/button-bg.png')" }}
           onClick={onStartClick}
         >
-          Get Started
-        </button>
+          <span className="font-metal text-[40px] text-black leading-normal">
+            Get Started
+          </span>
+        </a>
       </div>
-      
-      <svg className="absolute top-0 left-0 w-48 h-48 opacity-40" viewBox="0 0 100 100">
-        <path d="M 0 100 Q 20 80 40 70 T 100 40 L 0 0 Z" fill="#8B4513" opacity="0.3" />
-      </svg>
-      
-      <svg className="absolute bottom-0 right-0 w-48 h-48 opacity-40" viewBox="0 0 100 100">
-        <path d="M 100 100 Q 80 80 60 70 T 0 40 L 100 0 Z" fill="#8B4513" opacity="0.3" />
-      </svg>
     </div>
   );
 };

@@ -44,7 +44,13 @@ function App() {
     setCurrentScreen(1);
   };
 
-  const handleCardClick = () => {
+  const handleCardClick = (data) => {
+    if (data) {
+      setFormData({
+        recipientName: data.recipientName,
+        senderName: data.senderName
+      });
+    }
     setCurrentScreen(2);
   };
 

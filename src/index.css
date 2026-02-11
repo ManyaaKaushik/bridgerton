@@ -73,6 +73,19 @@
   }
 }
 
+/* Card fly-out animation - card flies up into position */
+@keyframes cardFlyOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 80px)) rotate(-4deg) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-4deg) scale(1);
+  }
+}
+
+
 @layer base {
   :root {
     --color-champagne: #c19a6b;

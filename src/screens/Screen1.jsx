@@ -1,17 +1,48 @@
 import React, { useState } from "react";
+import DanceCard from "../components/DanceCard";
 
 const imgImage28 =
   "https://www.figma.com/api/mcp/asset/240ba479-4f56-4c09-a688-c7c5cd57530e";
-const imgImage17 = "/image 17 [Vectorized].svg";
-const imgImage18 =
-  "https://www.figma.com/api/mcp/asset/e9ac081c-6372-41d1-8f86-69c9cf7e65dd";
 const imgImage16 =
   "https://www.figma.com/api/mcp/asset/207fcef9-8bbd-42f3-9d08-fd588eb5e56d";
+
+const CARD_WIDTH = 414;
+const CARD_HEIGHT = 584;
 
 const Screen1 = ({ onCardClick, onBackClick }) => {
   const [receiverName, setReceiverName] = useState("");
   const [senderName, setSenderName] = useState("");
+  const [phase, setPhase] = useState("form"); // 'form' | 'share'
+  const [copied, setCopied] = useState(false);
+
   const isFormValid = receiverName.trim() !== "" && senderName.trim() !== "";
+
+  const shareLink =
+    typeof window !== "undefined"
+      ? `${window.location.origin}${window.location.pathname.replace(/\/$/, "")}?recipient=${encodeURIComponent(receiverName.trim())}&sender=${encodeURIComponent(senderName.trim())}`
+      : "";
+
+  const handleNext = () => {
+    if (!isFormValid || phase !== "form") return;
+    setPhase("share");
+  };
+
+  const handleBack = () => {
+    setPhase("form");
+  };
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(shareLink);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCreateAnother = () => {
+    onBackClick();
+  };
+
+  const isShare = phase === "share";
+
   return (
     <div className="bg-white min-h-screen relative overflow-hidden font-linden-hill">
       {/* Background decorative image */}
@@ -23,148 +54,214 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
         />
       </div>
 
-      {/* Main content container - centered with gap */}
-      <div className="min-h-screen flex items-center justify-center px-8 py-10">
-        <div className="flex gap-16 items-center justify-center w-full max-w-6xl">
-          {/* Left side - Card */}
+      {/* Main content container */}
+      <div
+        className={`min-h-screen ${isShare ? "flex" : "flex items-center justify-center px-8 py-10"}`}
+      >
+        <div
+          className={
+            isShare
+              ? "flex w-full"
+              : "flex gap-16 items-center justify-center w-full max-w-6xl"
+          }
+        >
+          {/* Left side - Card / Share preview (hand image when sharing) */}
           <div
-            className={`flex-shrink-0 transition-transform ${isFormValid ? "cursor-pointer hover:scale-105" : "cursor-default opacity-90"}`}
-            onClick={() =>
-              isFormValid &&
-              onCardClick({
-                recipientName: receiverName.trim(),
-                senderName: senderName.trim(),
-              })
+            className={
+              isShare ? "w-1/2 min-h-screen relative shrink-0" : "shrink-0"
             }
           >
-            <div className="bg-[#fff7e3] w-[414px] h-[584px] border border-neutral-300 rounded-lg shadow-2xl overflow-hidden relative">
-              {/* Card background image */}
-              <div className="absolute inset-0">
-                <img
-                  alt="card background"
-                  className="absolute inset-0 max-w-none object-cover size-full"
-                  src={imgImage17}
-                />
-              </div>
-
-              {/* Card content */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                <img
-                  alt="Welcome to the"
-                  src="/Welcome to the.png"
-                  className="mb-6 max-w-full object-contain h-6 translate-y-6"
-                />
-                <p className="font-kapakana text-4xl text-black mb-12 mt-2">
-                  First Ball Of The Season
-                </p>
-
-                <p className="font-linden-hill pl-8 w-full text-left italic text-sm text-black/94 leading-relaxed mb-4 px-4">
-                  Dearest {receiverName || "_________________"} ,
-                </p>
-
-                <p className="font-linden-hill italic text-base text-black/94 leading-relaxed mb-6 px-4">
-                  It would be my greatest honour if you would reserve every
-                  dance upon this card for me alone. On this most romantic of
-                  evenings, let us waltz through the night as partners in this
-                  grand affair of the heart.
-                </p>
-
-                <p className="font-linden-hill italic text-base text-left pl-8 w-full text-black/94 leading-relaxed mb-1 px-4">
-                  Yours most affectionately,
-                </p>
-
-                <p className="font-linden-hill text-left pl-8 w-full italic text-base text-black/94 leading-relaxed mb-6 px-4">
-                  {senderName || "____________________________________"}
-                </p>
-
-                <div className="my-4">
+            {/* Share screen: full-left hand image with card overlay */}
+            {isShare && (
+              <div className="absolute inset-0 w-full h-full">
+                <div className="relative w-full h-full">
+                  {/* Hand image - full width, top to bottom */}
                   <img
-                    alt="decorative"
-                    className="h-6 opacity-60"
-                    src={imgImage18}
+                    alt="Elegant hands holding dance card"
+                    src="/hand.png"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  {/* Card overlay - flies out above */}
+                  <div
+                    className="absolute z-10"
+                    style={{
+                      width: CARD_WIDTH,
+                      height: CARD_HEIGHT,
+                      left: "50%",
+                      top: "50%",
+                      transform: "translate(-50%, -50%) rotate(-4deg)",
+                      animation: "cardFlyOut 0.5s ease-out forwards",
+                    }}
+                  >
+                    <DanceCard
+                      recipientName={receiverName}
+                      senderName={senderName}
+                      size="full"
+                      className="w-full h-full"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Form phase: card */}
+            {!isShare && (
+              <div
+                className="relative flex items-center justify-center"
+                style={{ width: CARD_WIDTH, height: CARD_HEIGHT }}
+              >
+                <div className="w-full h-full">
+                  <DanceCard
+                    recipientName={receiverName}
+                    senderName={senderName}
+                    size="full"
+                    showPlaceholders
+                    onClick={() =>
+                      phase === "form" && isFormValid && handleNext()
+                    }
+                    className="w-full h-full"
                   />
                 </div>
-
-                <p className="font-linden-hill italic text-xs text-black/94 leading-relaxed px-4">
-                  By accepting this card, you agree to bestow upon the bearer:
-                  sweet compliments, tender embraces, and your most charming
-                  company throughout the evening.
-                </p>
               </div>
-            </div>
+            )}
           </div>
 
-          {/* Right side - Text and Button */}
-          <div className="flex flex-col gap-10 flex-shrink-0">
-            {/* Heading */}
-            <div className="max-w-md">
-              <h1 className="font-linden-hill text-2xl text-[#313131] leading-tight text-balance">
-                Create your Bridgerton dance card and share it with your dearest
-              </h1>
-            </div>
+          {/* Right side - Form or Share UI */}
+          <div
+            className={`flex flex-col shrink-0 ${isShare ? "w-1/2 items-center justify-center px-12 lg:px-16" : "gap-10"}`}
+          >
+            {!isShare ? (
+              <>
+                <div className="max-w-md">
+                  <h1 className="font-linden-hill text-2xl text-[#313131] leading-tight text-balance">
+                    Create your Bridgerton dance card and share it with your
+                    dearest
+                  </h1>
+                </div>
 
-            {/* Form inputs */}
-            <div className="flex flex-col gap-4 max-w-sm">
-              <div>
-                <label
-                  htmlFor="receiver-name"
-                  className="block font-linden-hill text-sm text-[#313131] mb-1.5"
+                <div className="flex flex-col gap-4 max-w-sm">
+                  <div>
+                    <label
+                      htmlFor="receiver-name"
+                      className="block font-linden-hill text-sm text-[#313131] mb-1.5"
+                    >
+                      Receiver name
+                    </label>
+                    <input
+                      id="receiver-name"
+                      type="text"
+                      value={receiverName}
+                      onChange={(e) => setReceiverName(e.target.value)}
+                      placeholder="Enter receiver's name"
+                      className="w-full font-linden-hill px-4 py-3 border border-[#d4c4a8] rounded-lg bg-[#fffbf5] text-[#313131] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-[#d4c4a8] focus:border-transparent disabled:opacity-70"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="sender-name"
+                      className="block font-linden-hill text-sm text-[#313131] mb-1.5"
+                    >
+                      Your name
+                    </label>
+                    <input
+                      id="sender-name"
+                      type="text"
+                      value={senderName}
+                      onChange={(e) => setSenderName(e.target.value)}
+                      placeholder="Enter your name"
+                      className="w-full font-linden-hill px-4 py-3 border border-[#d4c4a8] rounded-lg bg-[#fffbf5] text-[#313131] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-[#d4c4a8] focus:border-transparent disabled:opacity-70"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleNext}
+                  disabled={!isFormValid}
+                  className={`relative w-fit inline-block group ${!isFormValid ? "opacity-60 cursor-not-allowed" : ""}`}
                 >
-                  Receiver name
-                </label>
-                <input
-                  id="receiver-name"
-                  type="text"
-                  value={receiverName}
-                  onChange={(e) => setReceiverName(e.target.value)}
-                  placeholder="Enter receiver's name"
-                  className="w-full font-linden-hill px-4 py-3 border border-[#d4c4a8] rounded-lg bg-[#fffbf5] text-[#313131] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-[#d4c4a8] focus:border-transparent"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="sender-name"
-                  className="block font-linden-hill text-sm text-[#313131] mb-1.5"
+                  <div className="absolute inset-0">
+                    <img
+                      alt=""
+                      className="w-full h-full object-cover"
+                      src={imgImage16}
+                    />
+                  </div>
+                  <span className="relative block font-metal text-2xl text-black text-center py-4 px-12">
+                    Next
+                  </span>
+                </button>
+              </>
+            ) : (
+              <div className="flex flex-col gap-8 w-full max-w-md animate-fade-in">
+                {/* Back button */}
+                <button
+                  onClick={handleBack}
+                  className="self-start bg-neutral-100 rounded-2xl flex items-center gap-2 px-4 py-2 text-sm font-linden-hill text-dark-brown hover:text-saddle-brown transition-colors"
                 >
-                  Your name
-                </label>
-                <input
-                  id="sender-name"
-                  type="text"
-                  value={senderName}
-                  onChange={(e) => setSenderName(e.target.value)}
-                  placeholder="Enter your name"
-                  className="w-full font-linden-hill px-4 py-3 border border-[#d4c4a8] rounded-lg bg-[#fffbf5] text-[#313131] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-[#d4c4a8] focus:border-transparent"
-                />
-              </div>
-            </div>
+                  <span>Back</span>
+                </button>
+                {/* Share header */}
+                <div className="space-y-2">
+                  <h1 className="font-playfair text-3xl font-semibold text-dark-brown italic leading-tight">
+                    Share your dance card
+                  </h1>
+                  <p className="font-linden-hill text-medium-brown text-lg italic">
+                    Send this link to your dearest — they will see the full
+                    letter
+                  </p>
+                </div>
 
-            {/* Next Button with decorative background */}
-            <button
-              onClick={() =>
-                isFormValid &&
-                onCardClick({
-                  recipientName: receiverName.trim(),
-                  senderName: senderName.trim(),
-                })
-              }
-              disabled={!isFormValid}
-              className={`relative w-fit inline-block group ${!isFormValid ? "opacity-60 cursor-not-allowed" : ""}`}
-            >
-              {/* Decorative button background */}
-              <div className="absolute inset-0">
-                <img
-                  alt=""
-                  className="w-full h-full object-cover"
-                  src={imgImage16}
-                />
-              </div>
+                {/* Share controls card */}
+                <div className="bg-floral-white/95 border-2 border-champagne rounded-xl p-6 shadow-lg shadow-champagne/20 backdrop-blur-sm">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="text-xl text-saddle-brown">✦</span>
+                    <label className="font-linden-hill text-sm font-medium text-dark-brown">
+                      Shareable link
+                    </label>
+                  </div>
+                  <div className="flex gap-3">
+                    <input
+                      type="text"
+                      value={shareLink}
+                      readOnly
+                      className="flex-1 min-w-0 px-4 py-3 text-sm font-mono border-2 border-champagne/60 rounded-lg bg-white/80 text-dark-brown focus:ring-2 focus:ring-champagne focus:border-transparent"
+                    />
+                    <button
+                      onClick={handleCopyLink}
+                      className={`relative w-fit inline-block shrink-0 group ${copied ? "opacity-90" : ""}`}
+                    >
+                      <div className="absolute inset-0">
+                        <img
+                          alt=""
+                          className="w-full h-full object-cover"
+                          src={imgImage16}
+                        />
+                      </div>
+                      <span className="relative block font-metal text-2xl text-black text-center py-4 px-8">
+                        {copied ? "✓ Copied!" : "Copy"}
+                      </span>
+                    </button>
+                  </div>
+                </div>
 
-              {/* Button text */}
-              <span className="relative block font-metal text-2xl text-black text-center py-4 px-12">
-                Next
-              </span>
-            </button>
+                {/* Create another */}
+                <button
+                  onClick={handleCreateAnother}
+                  className="relative w-fit inline-block group"
+                >
+                  <div className="absolute inset-0">
+                    <img
+                      alt=""
+                      className="w-full h-full object-cover"
+                      src={imgImage16}
+                    />
+                  </div>
+                  <span className="relative block font-metal text-2xl text-black text-center py-4 px-12">
+                    Create Another Card
+                  </span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

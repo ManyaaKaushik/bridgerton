@@ -125,8 +125,8 @@ const DanceCard = ({
 
   const wrapperClasses = `
     relative bg-[#fff7e3] overflow-hidden border border-neutral-300
-    ${isCompact ? "shadow-2xl border-neutral-300/80" : "shadow-2xl"}
-    ${onClick ? "cursor-pointer hover:opacity-60 hover:scale-[1.02] transition-all duration-200" : ""}
+    ${isCompact ? "shadow-2xl border-neutral-300/80" : "shadow-xl"}
+    ${onClick ? "cursor-pointer transition-all duration-200" : ""}
     ${className}
   `.trim();
 

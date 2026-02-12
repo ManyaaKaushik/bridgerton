@@ -6,9 +6,6 @@ const imgImage28 =
 const imgImage16 =
   "https://www.figma.com/api/mcp/asset/207fcef9-8bbd-42f3-9d08-fd588eb5e56d";
 
-const CARD_WIDTH = 414;
-const CARD_HEIGHT = 584;
-
 const Screen1 = ({ onCardClick, onBackClick }) => {
   const [receiverName, setReceiverName] = useState("");
   const [senderName, setSenderName] = useState("");
@@ -56,19 +53,21 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
 
       {/* Main content container */}
       <div
-        className={`min-h-screen ${isShare ? "flex" : "flex items-center justify-center px-8 py-10"}`}
+        className={`min-h-screen ${isShare ? "flex" : "flex items-center justify-center px-4 sm:px-8 py-8 sm:py-10"}`}
       >
         <div
           className={
             isShare
-              ? "flex w-full"
-              : "flex gap-16 items-center justify-center w-full max-w-6xl"
+              ? "flex flex-col lg:flex-row w-full"
+              : "flex flex-col xl:flex-row gap-8 xl:gap-16 items-center justify-center w-full max-w-6xl"
           }
         >
           {/* Left side - Card / Share preview (hand image when sharing) */}
           <div
             className={
-              isShare ? "w-1/2 min-h-screen relative shrink-0" : "shrink-0"
+              isShare
+                ? "w-full lg:w-1/2 min-h-[42vh] lg:min-h-screen relative shrink-0"
+                : "shrink-0 w-full max-w-[414px]"
             }
           >
             {/* Share screen: full-left hand image with card overlay */}
@@ -85,8 +84,8 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
                   <div
                     className="absolute z-10"
                     style={{
-                      width: CARD_WIDTH,
-                      height: CARD_HEIGHT,
+                      width: "min(414px, calc(100vw - 2.5rem))",
+                      height: "min(584px, calc((100vw - 2.5rem) * 584 / 414))",
                       left: "50%",
                       top: "50%",
                       transform: "translate(-50%, -50%) rotate(-4deg)",
@@ -108,7 +107,10 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
             {!isShare && (
               <div
                 className="relative flex items-center justify-center"
-                style={{ width: CARD_WIDTH, height: CARD_HEIGHT }}
+                style={{
+                  width: "min(414px, calc(100vw - 2.5rem))",
+                  height: "min(584px, calc((100vw - 2.5rem) * 584 / 414))",
+                }}
               >
                 <div className="w-full h-full">
                   <DanceCard
@@ -128,7 +130,7 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
 
           {/* Right side - Form or Share UI */}
           <div
-            className={`flex flex-col shrink-0 ${isShare ? "w-1/2 items-center justify-center px-12 lg:px-16" : "gap-10"}`}
+            className={`flex flex-col shrink-0 w-full ${isShare ? "lg:w-1/2 items-center justify-center px-4 sm:px-8 lg:px-16 py-8 lg:py-0" : "gap-8 sm:gap-10 max-w-md"}`}
           >
             {!isShare ? (
               <>
@@ -139,7 +141,7 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
                   </h1>
                 </div>
 
-                <div className="flex flex-col gap-4 max-w-sm">
+                <div className="flex flex-col gap-4 max-w-sm w-full">
                   <div>
                     <label
                       htmlFor="receiver-name"
@@ -177,7 +179,7 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
                 <button
                   onClick={handleNext}
                   disabled={!isFormValid}
-                  className={`relative w-fit inline-block group transition-all duration-200 !bg-transparent overflow-hidden ${!isFormValid ? "opacity-60 cursor-not-allowed" : "hover:opacity-60 hover:scale-[1.02]"}`}
+                  className={`relative w-fit inline-block group transition-all duration-200 bg-transparent! overflow-hidden ${!isFormValid ? "opacity-60 cursor-not-allowed" : "hover:opacity-60 hover:scale-[1.02]"}`}
                 >
                   <div className="absolute inset-0 overflow-hidden">
                     <img
@@ -192,7 +194,7 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
                 </button>
               </>
             ) : (
-              <div className="flex flex-col gap-8 w-full max-w-md animate-fade-in">
+              <div className="flex flex-col gap-6 sm:gap-8 w-full max-w-md animate-fade-in">
                 {/* Back button */}
                 <button
                   onClick={handleBack}
@@ -202,10 +204,10 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
                 </button>
                 {/* Share header */}
                 <div className="space-y-2">
-                  <h1 className="font-playfair text-3xl font-semibold text-dark-brown italic leading-tight">
+                  <h1 className="font-playfair text-2xl sm:text-3xl font-semibold text-dark-brown italic leading-tight">
                     Share your dance card
                   </h1>
-                  <p className="font-linden-hill text-medium-brown text-lg italic">
+                  <p className="font-linden-hill text-medium-brown text-base sm:text-lg italic">
                     Send this link to your dearest — they will see the full
                     letter
                   </p>
@@ -213,16 +215,16 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
 
                 {/* Share controls card */}
                 <div className="rounded-xl">
-                  <div className="flex gap-3">
+                  <div className="flex flex-col sm:flex-row gap-3">
                     <input
                       type="text"
                       value={shareLink}
                       readOnly
-                      className="flex-1 min-w-0 px-4 py-1 text-xs font-mono border-2 border-champagne/60 rounded-none bg-white/80 text-dark-brown focus:ring-2 focus:ring-champagne focus:border-transparent"
+                      className="flex-1 min-w-0 px-4 py-2 text-xs font-mono border-2 border-champagne/60 rounded-none bg-white/80 text-dark-brown focus:ring-2 focus:ring-champagne focus:border-transparent"
                     />
                     <button
                       onClick={handleCopyLink}
-                      className={`relative w-fit border-none active:border-none active:outline-none inline-block shrink-0 group !bg-transparent overflow-hidden transition-all duration-200 ${copied ? "opacity-90" : "hover:opacity-60 hover:scale-[1.02]"}`}
+                      className={`relative w-full sm:w-fit border-none active:border-none active:outline-none inline-block shrink-0 group bg-transparent! overflow-hidden transition-all duration-200 ${copied ? "opacity-90" : "hover:opacity-60 hover:scale-[1.02]"}`}
                     >
                       <div className="absolute inset-0 overflow-hidden">
                         <img
@@ -241,7 +243,7 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
                 {/* Create another */}
                 <button
                   onClick={handleCreateAnother}
-                  className="relative w-fit inline-block group !bg-transparent overflow-hidden hover:opacity-60 hover:scale-[1.02] transition-all duration-200"
+                  className="relative w-full md:w-fit inline-block group bg-transparent! overflow-hidden hover:opacity-60 hover:scale-[1.02] transition-all duration-200"
                 >
                   <div className="absolute inset-0 overflow-hidden">
                     <img

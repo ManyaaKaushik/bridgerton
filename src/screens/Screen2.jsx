@@ -14,7 +14,7 @@ const Screen2 = ({ onFormSubmit, onClose, initialData }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-5 bg-gradient-to-br from-tan via-floral-white to-tan font-crimson animate-slide-up">
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-5 bg-linear-to-br from-tan via-floral-white to-tan font-crimson animate-slide-up">
       {/* Main Card Container */}
       <div className="relative w-full max-w-sm">
         {/* Background Card Image */}
@@ -26,7 +26,7 @@ const Screen2 = ({ onFormSubmit, onClose, initialData }) => {
           />
           
           {/* Content Overlay */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-12 overflow-y-auto">
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 sm:p-12 overflow-y-auto">
             {/* Title */}
             <p className="text-center text-sm font-metal text-dark-brown mb-6 tracking-wider">
               First Ball Of The Season
@@ -86,7 +86,7 @@ const Screen2 = ({ onFormSubmit, onClose, initialData }) => {
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-3 justify-end mt-8">
+        <div className="flex gap-3 justify-end mt-6 sm:mt-8">
           <button 
             className="px-5 py-2 text-sm font-crimson bg-orange-100 text-medium-brown border border-champagne rounded cursor-pointer hover:bg-orange-200 hover:opacity-60 transition-all duration-200"
             onClick={onClose}

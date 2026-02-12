@@ -3,18 +3,17 @@ import React from "react";
 const Screen0 = ({ onStartClick }) => {
   return (
     <div
-      className="min-h-screen bg-[#ffffff] flex flex-col justify-center items-cente relative overflow-hidden font-crimson bg-cover bg-center bg-no-repeat"
+      className="min-h-screen bg-[#ffffff] flex flex-col justify-center items-center relative overflow-hidden font-crimson bg-cover bg-center bg-no-repeat bg-scroll sm:bg-fixed px-4"
       style={{
         backgroundImage: "url('/bg1.png')",
-        backgroundAttachment: "fixed",
         backgroundSize: "cover",
       }}
     >
       <div className="text-center z-10 animate-fade-in">
-        <h1 className="text-8xl font-luxurious text-dark-brown mb-1 tracking-tight drop-shadow-md">
+        <h1 className="text-5xl sm:text-8xl font-luxurious text-dark-brown mb-1 tracking-tight drop-shadow-md">
           Dearest &nbsp; Valentine
         </h1>
-        <p className="text-4xl italic tracking-tight font-linden-hill text-medium-brown mb-8 font-light">
+        <p className="text-2xl sm:text-4xl italic tracking-tight font-linden-hill text-medium-brown mb-8 font-light">
           A Bridgerton Affair
         </p>
 

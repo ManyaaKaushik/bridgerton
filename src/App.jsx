@@ -88,23 +88,13 @@ function App() {
 
   return (
     <div className="app">
-      {/* Mobile-only message - shown below sm breakpoint */}
-      <div className="sm:hidden fixed inset-0 flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-tan to-floral-white z-50">
-        <p className="font-playfair text-xl text-dark-brown">
-          Open it on a desktop
-        </p>
-        <p className="mt-3 font-crimson text-base text-medium-brown">
-          For the best experience, please view this on a larger screen.
-        </p>
-      </div>
-      {/* Main app - hidden on mobile, visible from sm and up */}
-      <div className="hidden sm:block">
+      <div>
         {/* Floating attribution banner */}
         <a
           href="https://www.linkedin.com/in/manyakaushikprofile/"
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-4 left-4 z-40 px-4 py-2 bg-champagne/90 backdrop-blur-sm border border-saddle-brown/30 rounded-full text-neutral-950 text-sm font-crimson shadow-lg hover:scale-105 transition-all duration-200"
+          className="fixed bottom-4 left-1/2 -translate-x-1/2 sm:left-4 sm:translate-x-0 z-40 px-3 sm:px-4 py-2 bg-champagne/90 backdrop-blur-sm border border-saddle-brown/30 rounded-full text-neutral-950 text-xs sm:text-sm font-crimson shadow-lg hover:scale-105 transition-all duration-200"
         >
           made by <span className="font-bold">manya kaushik</span>
         </a>

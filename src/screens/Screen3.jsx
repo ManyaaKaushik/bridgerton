@@ -4,9 +4,6 @@ import DanceCard from "../components/DanceCard";
 const imgImage16 =
   "https://www.figma.com/api/mcp/asset/207fcef9-8bbd-42f3-9d08-fd588eb5e56d";
 
-const CARD_WIDTH = 414;
-const CARD_HEIGHT = 584;
-
 const Screen3 = ({ formData, onGetLinkClick, onBackClick, isSharedMode }) => {
   const [isRevealed, setIsRevealed] = useState(false);
 
@@ -19,16 +16,16 @@ const Screen3 = ({ formData, onGetLinkClick, onBackClick, isSharedMode }) => {
       className={`min-h-screen flex flex-col items-center p-10 pb-16 font-crimson ${
         isSharedMode
           ? "bg-repeat bg-cover bg-center"
-          : "bg-gradient-to-br from-tan via-floral-white to-tan"
+          : "bg-linear-to-br from-tan via-floral-white to-tan"
       }`}
       style={isSharedMode ? { backgroundImage: "url(/bg-r.png)" } : undefined}
     >
       {!isSharedMode && (
-        <div className="w-full flex justify-between items-center mb-10 max-w-2xl">
+        <div className="w-full flex justify-between items-center mb-8 sm:mb-10 max-w-2xl gap-3">
           <button className="btn-secondary" onClick={onBackClick}>
             ← Back
           </button>
-          <h2 className="text-xl font-playfair text-dark-brown">
+          <h2 className="text-base sm:text-xl font-playfair text-dark-brown text-center">
             Your Dance Card
           </h2>
           <div className="w-20"></div>
@@ -39,15 +36,15 @@ const Screen3 = ({ formData, onGetLinkClick, onBackClick, isSharedMode }) => {
         {isSharedMode ? (
           /* Receiver view: filled card with flip-to-reveal on Accept */
           <div
-            className="relative w-full max-w-4xl flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12 px-6"
+            className="relative w-full max-w-4xl flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12 px-3 sm:px-6"
             style={{ perspective: "1200px" }}
           >
             {/* Flip card container */}
             <div
               className="relative shrink-0"
               style={{
-                width: CARD_WIDTH,
-                height: CARD_HEIGHT,
+                width: "min(414px, calc(100vw - 2rem))",
+                height: "min(584px, calc((100vw - 2rem) * 584 / 414))",
                 transformStyle: "preserve-3d",
                 transform: isRevealed ? "rotateY(180deg)" : "rotateY(0deg)",
                 transition: "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -88,11 +85,11 @@ const Screen3 = ({ formData, onGetLinkClick, onBackClick, isSharedMode }) => {
 
             {/* Invitation panel when not yet revealed */}
             {!isRevealed && (
-              <div className="flex flex-col items-start gap-4 max-w-xs">
-                <h1 className="font-luxurious text-nowrap text-5xl md:text-6xl text-dark-brown">
+              <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 max-w-xs">
+                <h1 className="font-luxurious whitespace-normal md:whitespace-nowrap text-4xl sm:text-5xl md:text-6xl text-dark-brown leading-tight">
                   Dance Card Invitation
                 </h1>
-                <p className="font-linden-hill text-2xl text-medium-brown italic">
+                <p className="font-linden-hill text-xl sm:text-2xl text-medium-brown italic">
                   Received from{" "}
                   <span className="font-semibold text-dark-brown">
                     {formData.senderName}
@@ -100,7 +97,7 @@ const Screen3 = ({ formData, onGetLinkClick, onBackClick, isSharedMode }) => {
                 </p>
                 <button
                   onClick={handleAccept}
-                  className="relative w-fit inline-block shrink-0 group cursor-pointer active:scale-[0.98] transition-all duration-200 !bg-transparent overflow-hidden hover:opacity-60 hover:scale-[1.02]"
+                  className="relative w-full sm:w-fit inline-block shrink-0 group cursor-pointer active:scale-[0.98] transition-all duration-200 bg-transparent! overflow-hidden hover:opacity-60 hover:scale-[1.02]"
                 >
                   <div className="absolute inset-0 overflow-hidden">
                     <img
@@ -118,11 +115,11 @@ const Screen3 = ({ formData, onGetLinkClick, onBackClick, isSharedMode }) => {
 
             {/* Create your own card button after reveal */}
             {isRevealed && (
-              <div className="flex flex-col items-start gap-4 max-w-xs">
-                <h1 className="font-luxurious text-nowrap text-5xl md:text-6xl text-dark-brown">
+              <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 max-w-xs">
+                <h1 className="font-luxurious whitespace-normal md:whitespace-nowrap text-4xl sm:text-5xl md:text-6xl text-dark-brown leading-tight">
                   Dance Card Invitation
                 </h1>
-                <p className="font-linden-hill text-2xl text-medium-brown italic">
+                <p className="font-linden-hill text-xl sm:text-2xl text-medium-brown italic">
                   Received from{" "}
                   <span className="font-semibold text-dark-brown">
                     {formData.senderName}
@@ -130,7 +127,7 @@ const Screen3 = ({ formData, onGetLinkClick, onBackClick, isSharedMode }) => {
                 </p>
                 <button
                   onClick={onBackClick}
-                  className="relative translate-x-[-12px] w-fit inline-block shrink-0 group cursor-pointer active:scale-[0.98] transition-all duration-200 !bg-transparent overflow-hidden hover:opacity-60 hover:scale-[1.02]"
+                  className="relative sm:translate-x-[-12px] w-full sm:w-fit inline-block shrink-0 group cursor-pointer active:scale-[0.98] transition-all duration-200 bg-transparent! overflow-hidden hover:opacity-60 hover:scale-[1.02]"
                 >
                   <div className="absolute inset-0 overflow-hidden">
                     <img
@@ -148,7 +145,7 @@ const Screen3 = ({ formData, onGetLinkClick, onBackClick, isSharedMode }) => {
           </div>
         ) : (
           /* Creator view - original layout */
-          <div className="w-full max-w-xl bg-floral-white border-4 border-saddle-brown rounded-lg p-10 shadow-2xl animate-fade-in-scale relative">
+          <div className="w-full max-w-xl bg-floral-white border-4 border-saddle-brown rounded-lg p-5 sm:p-10 shadow-2xl animate-fade-in-scale relative">
             <div className="absolute top-4 left-4 text-2xl text-saddle-brown opacity-70">
               ✦
             </div>
@@ -162,7 +159,7 @@ const Screen3 = ({ formData, onGetLinkClick, onBackClick, isSharedMode }) => {
               ✦
             </div>
 
-            <h1 className="text-2xl font-playfair text-dark-brown text-center mb-8 font-semibold tracking-wide">
+            <h1 className="text-xl sm:text-2xl font-playfair text-dark-brown text-center mb-6 sm:mb-8 font-semibold tracking-wide">
               First Ball Of The Season
             </h1>
 

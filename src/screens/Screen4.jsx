@@ -23,12 +23,12 @@ const Screen4 = ({ shareLink, onBackClick }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center p-5 bg-gradient-to-br from-tan via-floral-white to-tan font-crimson">
-      <div className="w-full max-w-2xl bg-floral-white rounded-lg p-10 shadow-xl mb-10">
-        <h1 className="text-5xl font-playfair text-dark-brown text-center mb-3 italic">
+    <div className="min-h-screen flex flex-col justify-center items-center p-5 bg-linear-to-br from-tan via-floral-white to-tan font-crimson">
+      <div className="w-full max-w-2xl bg-floral-white rounded-lg p-5 sm:p-10 shadow-xl mb-10">
+        <h1 className="text-3xl sm:text-5xl font-playfair text-dark-brown text-center mb-3 italic">
           Your Link is Ready
         </h1>
-        <p className="text-lg font-crimson text-medium-brown text-center mb-8 italic">
+        <p className="text-base sm:text-lg font-crimson text-medium-brown text-center mb-8 italic">
           Share this link with your special someone
         </p>
 
@@ -43,7 +43,7 @@ const Screen4 = ({ shareLink, onBackClick }) => {
                 className="flex-1 min-w-[200px] px-3 py-2 text-xs font-mono border border-champagne rounded bg-white text-dark-brown"
               />
               <button
-                className={`px-5 py-2 text-sm font-crimson font-semibold border-2 border-saddle-brown rounded cursor-pointer transition-all duration-200 ${copied ? 'bg-green-400 text-white' : 'bg-champagne text-dark-brown hover:bg-yellow-700 hover:opacity-60 hover:scale-[1.02]'}`}
+                className={`px-5 py-2 text-sm font-crimson font-semibold border-2 border-saddle-brown rounded cursor-pointer transition-all duration-200 w-full sm:w-auto ${copied ? 'bg-green-400 text-white' : 'bg-champagne text-dark-brown hover:bg-yellow-700 hover:opacity-60 hover:scale-[1.02]'}`}
                 onClick={handleCopyLink}
               >
                 {copied ? '✓ Copied' : 'Copy'}

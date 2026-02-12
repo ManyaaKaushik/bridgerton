@@ -194,7 +194,7 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
                 </button>
               </>
             ) : (
-              <div className="flex flex-col gap-6 sm:gap-8 w-full max-w-md animate-fade-in">
+              <div className="mt-20 flex flex-col gap-6 sm:gap-8 w-full max-w-md animate-fade-in">
                 {/* Back button */}
                 <button
                   onClick={handleBack}

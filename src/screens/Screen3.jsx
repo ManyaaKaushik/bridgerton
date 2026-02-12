@@ -130,7 +130,7 @@ const Screen3 = ({ formData, onGetLinkClick, onBackClick, isSharedMode }) => {
                 </p>
                 <button
                   onClick={onBackClick}
-                  className="relative w-fit inline-block shrink-0 group cursor-pointer active:scale-[0.98] transition-all duration-200 !bg-transparent overflow-hidden hover:opacity-60 hover:scale-[1.02]"
+                  className="relative translate-x-[-12px] w-fit inline-block shrink-0 group cursor-pointer active:scale-[0.98] transition-all duration-200 !bg-transparent overflow-hidden hover:opacity-60 hover:scale-[1.02]"
                 >
                   <div className="absolute inset-0 overflow-hidden">
                     <img

@@ -88,11 +88,23 @@ function App() {
 
   return (
     <div className="app">
-      {currentScreen === 0 && <Screen0 onStartClick={handleStartClick} />}
-      {currentScreen === 1 && <Screen1 onCardClick={handleCardClick} onBackClick={resetApp} />}
-      {currentScreen === 2 && <Screen2 onFormSubmit={handleFormSubmit} onClose={() => setCurrentScreen(1)} initialData={formData} />}
-      {currentScreen === 3 && <Screen3 formData={formData} onGetLinkClick={handleGenerateLink} onBackClick={resetApp} isSharedMode={isSharedMode} />}
-      {currentScreen === 4 && <Screen4 shareLink={shareLink} onBackClick={resetApp} />}
+      {/* Mobile-only message - shown below sm breakpoint */}
+      <div className="sm:hidden fixed inset-0 flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-tan to-floral-white z-50">
+        <p className="font-playfair text-xl text-dark-brown">
+          Open it on a desktop
+        </p>
+        <p className="mt-3 font-crimson text-base text-medium-brown">
+          For the best experience, please view this on a larger screen.
+        </p>
+      </div>
+      {/* Main app - hidden on mobile, visible from sm and up */}
+      <div className="hidden sm:block">
+        {currentScreen === 0 && <Screen0 onStartClick={handleStartClick} />}
+        {currentScreen === 1 && <Screen1 onCardClick={handleCardClick} onBackClick={resetApp} />}
+        {currentScreen === 2 && <Screen2 onFormSubmit={handleFormSubmit} onClose={() => setCurrentScreen(1)} initialData={formData} />}
+        {currentScreen === 3 && <Screen3 formData={formData} onGetLinkClick={handleGenerateLink} onBackClick={resetApp} isSharedMode={isSharedMode} />}
+        {currentScreen === 4 && <Screen4 shareLink={shareLink} onBackClick={resetApp} />}
+      </div>
     </div>
   );
 }

@@ -49,7 +49,7 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
       <div className="absolute h-[834px] left-[-47px] opacity-[0.12] top-[-9px] w-[636px] pointer-events-none">
         <img
           alt=""
-          className="absolute inset-0 max-w-none object-cover size-full"
+          className="absolute inset-0 max-w-none object-cover size-full contrast-110"
           src={imgImage28}
         />
       </div>
@@ -79,7 +79,7 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
                   <img
                     alt="Elegant hands holding dance card"
                     src="/hand.png"
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover contrast-110"
                   />
                   {/* Card overlay - flies out above */}
                   <div
@@ -177,12 +177,12 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
                 <button
                   onClick={handleNext}
                   disabled={!isFormValid}
-                  className={`relative w-fit inline-block group ${!isFormValid ? "opacity-60 cursor-not-allowed" : ""}`}
+                  className={`relative w-fit inline-block group transition-all duration-200 !bg-transparent overflow-hidden ${!isFormValid ? "opacity-60 cursor-not-allowed" : "hover:opacity-60 hover:scale-[1.02]"}`}
                 >
-                  <div className="absolute inset-0">
+                  <div className="absolute inset-0 overflow-hidden">
                     <img
                       alt=""
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover contrast-110"
                       src={imgImage16}
                     />
                   </div>
@@ -196,7 +196,7 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
                 {/* Back button */}
                 <button
                   onClick={handleBack}
-                  className="self-start bg-neutral-100 rounded-2xl flex items-center gap-2 px-4 py-2 text-sm font-linden-hill text-dark-brown hover:text-saddle-brown transition-colors"
+                  className="self-start bg-neutral-100 rounded-2xl flex items-center gap-2 px-4 py-2 text-sm font-linden-hill text-dark-brown hover:text-saddle-brown hover:opacity-60 transition-all duration-200"
                 >
                   <span>Back</span>
                 </button>
@@ -212,33 +212,27 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
                 </div>
 
                 {/* Share controls card */}
-                <div className="bg-floral-white/95 border-2 border-champagne rounded-xl p-6 shadow-lg shadow-champagne/20 backdrop-blur-sm">
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-xl text-saddle-brown">✦</span>
-                    <label className="font-linden-hill text-sm font-medium text-dark-brown">
-                      Shareable link
-                    </label>
-                  </div>
+                <div className="rounded-xl">
                   <div className="flex gap-3">
                     <input
                       type="text"
                       value={shareLink}
                       readOnly
-                      className="flex-1 min-w-0 px-4 py-3 text-sm font-mono border-2 border-champagne/60 rounded-lg bg-white/80 text-dark-brown focus:ring-2 focus:ring-champagne focus:border-transparent"
+                      className="flex-1 min-w-0 px-4 py-1 text-xs font-mono border-2 border-champagne/60 rounded-none bg-white/80 text-dark-brown focus:ring-2 focus:ring-champagne focus:border-transparent"
                     />
                     <button
                       onClick={handleCopyLink}
-                      className={`relative w-fit inline-block shrink-0 group ${copied ? "opacity-90" : ""}`}
+                      className={`relative w-fit border-none active:border-none active:outline-none inline-block shrink-0 group !bg-transparent overflow-hidden transition-all duration-200 ${copied ? "opacity-90" : "hover:opacity-60 hover:scale-[1.02]"}`}
                     >
-                      <div className="absolute inset-0">
+                      <div className="absolute inset-0 overflow-hidden">
                         <img
                           alt=""
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover contrast-110"
                           src={imgImage16}
                         />
                       </div>
                       <span className="relative block font-metal text-2xl text-black text-center py-4 px-8">
-                        {copied ? "✓ Copied!" : "Copy"}
+                        {copied ? "✓ Copied!" : "Copy URL"}
                       </span>
                     </button>
                   </div>
@@ -247,12 +241,12 @@ const Screen1 = ({ onCardClick, onBackClick }) => {
                 {/* Create another */}
                 <button
                   onClick={handleCreateAnother}
-                  className="relative w-fit inline-block group"
+                  className="relative w-fit inline-block group !bg-transparent overflow-hidden hover:opacity-60 hover:scale-[1.02] transition-all duration-200"
                 >
-                  <div className="absolute inset-0">
+                  <div className="absolute inset-0 overflow-hidden">
                     <img
                       alt=""
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover contrast-110"
                       src={imgImage16}
                     />
                   </div>

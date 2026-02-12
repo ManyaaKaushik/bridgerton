@@ -38,7 +38,7 @@ const DanceCard = ({
       <div className="absolute inset-0 bg-[#fff7e3]" aria-hidden />
       <img
         alt=""
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover contrast-110"
         src={IMG_BACKGROUND}
         style={{ opacity: isCompact ? 0.85 : 1 }}
       />
@@ -50,7 +50,7 @@ const DanceCard = ({
         <img
           alt="Welcome to the"
           src={IMG_WELCOME}
-          className={`max-w-full object-contain ${isCompact ? "mb-1 h-3" : "mb-6 h-6 translate-y-6"}`}
+          className={`max-w-full object-contain contrast-110 ${isCompact ? "mb-1 h-3" : "mb-6 h-6 translate-y-6"}`}
         />
         <p
           className={`font-kapakana text-black mb-2 ${
@@ -105,7 +105,7 @@ const DanceCard = ({
         <div className={isCompact ? "my-1" : "my-4"}>
           <img
             alt="decorative"
-            className={`opacity-60 ${isCompact ? "h-2" : "h-6"}`}
+            className={`opacity-60 contrast-110 ${isCompact ? "h-2" : "h-6"}`}
             src={IMG_DECORATIVE}
           />
         </div>
@@ -126,7 +126,7 @@ const DanceCard = ({
   const wrapperClasses = `
     relative bg-[#fff7e3] overflow-hidden border border-neutral-300
     ${isCompact ? "shadow-2xl border-neutral-300/80" : "shadow-2xl"}
-    ${onClick ? "cursor-pointer hover:opacity-95" : ""}
+    ${onClick ? "cursor-pointer hover:opacity-60 hover:scale-[1.02] transition-all duration-200" : ""}
     ${className}
   `.trim();
 

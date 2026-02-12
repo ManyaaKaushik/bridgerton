@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import DanceCard from "../components/DanceCard";
 
+const imgImage16 =
+  "https://www.figma.com/api/mcp/asset/207fcef9-8bbd-42f3-9d08-fd588eb5e56d";
+
 const CARD_WIDTH = 414;
 const CARD_HEIGHT = 584;
 
@@ -97,21 +100,48 @@ const Screen3 = ({ formData, onGetLinkClick, onBackClick, isSharedMode }) => {
                 </p>
                 <button
                   onClick={handleAccept}
-                  className="px-6 pt-2 pb-1.5 text-lg font-linden-hill font-semibold rounded-full cursor-pointer transition-all duration-300 bg-green-200 text-dark-brown border-2 border-saddle-brown hover:bg-yellow-700 hover:shadow-lg active:scale-[0.98]"
+                  className="relative w-fit inline-block shrink-0 group cursor-pointer active:scale-[0.98] transition-all duration-200 !bg-transparent overflow-hidden hover:opacity-60 hover:scale-[1.02]"
                 >
-                  Open Card
+                  <div className="absolute inset-0 overflow-hidden">
+                    <img
+                      alt=""
+                      className="w-full h-full object-cover contrast-110"
+                      src={imgImage16}
+                    />
+                  </div>
+                  <span className="relative block font-metal text-2xl text-black text-center py-4 px-8">
+                    Open Card
+                  </span>
                 </button>
               </div>
             )}
 
             {/* Create your own card button after reveal */}
             {isRevealed && (
-              <div className="flex flex-col items-start max-w-xs">
+              <div className="flex flex-col items-start gap-4 max-w-xs">
+                <h1 className="font-luxurious text-nowrap text-5xl md:text-6xl text-dark-brown">
+                  Dance Card Invitation
+                </h1>
+                <p className="font-linden-hill text-2xl text-medium-brown italic">
+                  Received from{" "}
+                  <span className="font-semibold text-dark-brown">
+                    {formData.senderName}
+                  </span>
+                </p>
                 <button
                   onClick={onBackClick}
-                  className="px-6 py-2 text-sm font-linden-hill font-semibold rounded-full cursor-pointer transition-all duration-300 bg-champagne text-dark-brown border-2 border-saddle-brown hover:bg-yellow-700 hover:shadow-lg active:scale-[0.98]"
+                  className="relative w-fit inline-block shrink-0 group cursor-pointer active:scale-[0.98] transition-all duration-200 !bg-transparent overflow-hidden hover:opacity-60 hover:scale-[1.02]"
                 >
-                  Create your own card
+                  <div className="absolute inset-0 overflow-hidden">
+                    <img
+                      alt=""
+                      className="w-full h-full object-cover contrast-110"
+                      src={imgImage16}
+                    />
+                  </div>
+                  <span className="relative block font-linden-hill text-2xl text-dark-brown text-center py-4 px-10">
+                    Create your own card
+                  </span>
                 </button>
               </div>
             )}

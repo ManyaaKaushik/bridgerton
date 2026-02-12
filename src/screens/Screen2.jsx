@@ -21,7 +21,7 @@ const Screen2 = ({ onFormSubmit, onClose, initialData }) => {
         <div className="relative w-full overflow-hidden rounded-lg shadow-2xl" style={{ aspectRatio: '405/605' }}>
           <img 
             alt="card background" 
-            className="absolute inset-0 w-full h-full object-cover" 
+            className="absolute inset-0 w-full h-full object-cover contrast-110" 
             src={imgImage17} 
           />
           
@@ -72,7 +72,7 @@ const Screen2 = ({ onFormSubmit, onClose, initialData }) => {
               <div className="flex justify-center py-3">
                 <img 
                   alt="decorative element" 
-                  className="h-8 opacity-80" 
+                  className="h-8 opacity-80 contrast-110" 
                   src={imgVector} 
                 />
               </div>
@@ -88,13 +88,13 @@ const Screen2 = ({ onFormSubmit, onClose, initialData }) => {
         {/* Buttons */}
         <div className="flex gap-3 justify-end mt-8">
           <button 
-            className="px-5 py-2 text-sm font-crimson bg-orange-100 text-medium-brown border border-champagne rounded cursor-pointer hover:bg-orange-200 transition-all"
+            className="px-5 py-2 text-sm font-crimson bg-orange-100 text-medium-brown border border-champagne rounded cursor-pointer hover:bg-orange-200 hover:opacity-60 transition-all duration-200"
             onClick={onClose}
           >
             Cancel
           </button>
           <button 
-            className={`px-8 py-2 text-sm font-crimson font-semibold bg-champagne text-dark-brown border-2 border-saddle-brown rounded cursor-pointer transition-all ${recipientName.trim() && senderName.trim() ? 'opacity-100 hover:bg-yellow-700' : 'opacity-50 cursor-not-allowed'}`}
+            className={`px-8 py-2 text-sm font-crimson font-semibold bg-champagne text-dark-brown border-2 border-saddle-brown rounded cursor-pointer transition-all duration-200 ${recipientName.trim() && senderName.trim() ? 'opacity-100 hover:bg-yellow-700 hover:opacity-60 hover:scale-[1.02]' : 'opacity-50 cursor-not-allowed'}`}
             onClick={handleSubmit}
             disabled={!recipientName.trim() || !senderName.trim()}
           >

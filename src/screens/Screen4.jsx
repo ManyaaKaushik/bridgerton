@@ -43,7 +43,7 @@ const Screen4 = ({ shareLink, onBackClick }) => {
                 className="flex-1 min-w-[200px] px-3 py-2 text-xs font-mono border border-champagne rounded bg-white text-dark-brown"
               />
               <button
-                className={`px-5 py-2 text-sm font-crimson font-semibold border-2 border-saddle-brown rounded cursor-pointer transition-all ${copied ? 'bg-green-400 text-white' : 'bg-champagne text-dark-brown hover:bg-yellow-700'}`}
+                className={`px-5 py-2 text-sm font-crimson font-semibold border-2 border-saddle-brown rounded cursor-pointer transition-all duration-200 ${copied ? 'bg-green-400 text-white' : 'bg-champagne text-dark-brown hover:bg-yellow-700 hover:opacity-60 hover:scale-[1.02]'}`}
                 onClick={handleCopyLink}
               >
                 {copied ? '✓ Copied' : 'Copy'}
@@ -59,14 +59,14 @@ const Screen4 = ({ shareLink, onBackClick }) => {
           
           <div className="flex gap-4 justify-center flex-wrap">
             <button 
-              className="px-6 py-2 text-base font-crimson font-semibold text-white bg-green-500 rounded cursor-pointer transition-all hover:bg-green-600"
+              className="px-6 py-2 text-base font-crimson font-semibold text-white bg-green-500 rounded cursor-pointer transition-all duration-200 hover:bg-green-600 hover:opacity-60 hover:scale-[1.02]"
               onClick={handleShareToWhatsApp}
             >
               💬 WhatsApp
             </button>
 
             <button 
-              className="px-6 py-2 text-base font-crimson font-semibold text-white bg-blue-600 rounded cursor-pointer transition-all hover:bg-blue-700"
+              className="px-6 py-2 text-base font-crimson font-semibold text-white bg-blue-600 rounded cursor-pointer transition-all duration-200 hover:bg-blue-700 hover:opacity-60 hover:scale-[1.02]"
               onClick={handleShareToEmail}
             >
               📧 Email
